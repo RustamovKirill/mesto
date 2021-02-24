@@ -1,0 +1,8 @@
+.element {
+    margin: 0px;
+    padding: 0px;
+    max-width: 282px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+}

@@ -1,0 +1,25 @@
+.input__button-save {
+    margin-top: 48px;
+    padding: 0px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #fff;
+    padding-top: 14px;
+    padding-bottom: 18px;
+    background-color: rgba(0, 0, 0, 1);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+.input__button-save:hover {
+    background-color: rgba(0, 0, 0, .8);
+}
+
+@media screen and (max-width: 425px) {
+    .input__button-save {
+        margin: 45px 22px 0px;
+        max-width: 238px;
+        padding-bottom: 14px;
+    }
+}

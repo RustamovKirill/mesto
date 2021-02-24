@@ -1,0 +1,28 @@
+.profile__info {
+    margin: auto auto auto 30px;
+    box-sizing: border-box;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 24px;
+    row-gap: 16px;
+    column-gap: 25px;
+}
+@media screen and (max-width: 565px) {
+    .profile__info {
+        margin: 20px auto 0px 91px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .profile__info {
+        margin: 25px auto 0px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .profile__info {
+        min-width: 282px;
+        margin: 22px 0px 0px 0px;
+        grid-template-columns: 1fr 18px;
+        row-gap: 14px;
+        column-gap: 10px;
+    }
+}
