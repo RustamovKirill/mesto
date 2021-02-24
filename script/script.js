@@ -2,8 +2,8 @@ let openForm = document.querySelector('#open-form'); //переменная кн
 let closeForm = document.querySelector('.popup__button'); //переменная кнопки закрытия popup
 let saveButton = document.querySelector('.input__button-save'); //переменная кнопки сохранить
 let popup = document.querySelector('.popup'); //переменная с блоком popup
-let profileTitle = document.querySelector('.profile__title'); //
-let profileSubtitle = document.querySelector('.profile__subtitle');//
+let profileTitle = document.querySelector('.profile__title'); //поле с именем
+let profileSubtitle = document.querySelector('.profile__subtitle');//поле с описанием
 
 //функция запускающая popup
 function openPopup() {
@@ -29,4 +29,3 @@ saveButton.addEventListener('keypress', function (event) {
 openForm.addEventListener('click', openPopup); //дейсвие по нажатию на кнопку открытия ручка
 closeForm.addEventListener('click', closePopup); //дейсвие по нажатию на кнопку Х, закрытие формы
 saveButton.addEventListener('click', closePopup);//дейсвие по нажатию на кнопку Сохранить
-
