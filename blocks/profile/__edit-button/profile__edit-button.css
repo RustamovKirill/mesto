@@ -1,4 +1,4 @@
-.edit-button {
+.profile__edit-button {
     margin: 15px 0px 0px 0px;
     padding: 0px;
     width: 24px;
@@ -7,25 +7,26 @@
     grid-row: 2 / -1;
     background-color: #000;
     border: 1px solid #fff;
-    background-image: url("../../images/pen.svg");
+    background-image: url("../../../images/pen.svg");
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
     outline: none;
     opacity: 1;
 }
-.edit-button:hover {
-    opacity: 0.5;
+.profile__edit-button:hover {
+    opacity: 0.6;
 }
 @media screen and (max-width: 640px) {
-    .edit-button {
+    .profile__edit-button {
         margin: auto 0px;
     }
 }
 @media screen and (max-width: 320px) {
-    .edit-button {
+    .profile__edit-button {
         width: 18px;
         height: 18px;
         margin: auto;
+        background-size: 7.5px 7.5px;
     }
 }
