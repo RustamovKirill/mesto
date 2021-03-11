@@ -56,13 +56,12 @@ function openPopupAdd() {
  openAllPopup(popupAdd);
 }
 openFormAdd.addEventListener('click', openPopupAdd);
-
 function closePopupAdd() {
   popupAdd.classList.remove('popup_open');
 }
 closeFormAdd.addEventListener('click', closePopupAdd);
 
-//функция добавления новой карточки на странице
+//функция добавления новой карточки на страницу 
 function addNewCard(event) {
   const typeTitle = document.querySelector('.input__text_type_title');// две переменные поля ввода 
   const typeLink = document.querySelector('.input__text_type_link');//в popup, в которых передаеться информация полей
