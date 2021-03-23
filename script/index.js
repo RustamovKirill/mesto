@@ -28,27 +28,36 @@ const templateContainer = document.querySelector('.template').content;
 
 //универсальная функция, которую в дальнейшем переиспозьем для открытия всех popup
 function openAllPopup(popup) {
+  const buttonSave = popup.querySelector('.input__button-save');
+  const inputsForm = Array.from(popup.querySelectorAll('.popup__text'));
+  //вызвали функцию переключения состояния кнопки submit,
+  //чолбы проверять при каждом открытиттpopup
+  switchButton(inputsForm, buttonSave);
   popup.classList.add('popup_open');
-  popup.addEventListener('click', closeClickOverlay);
   document.addEventListener('keydown', closeClickEscape);
+  popup.addEventListener('click', closeClickOverlay);
+  
 }
 //функция закрывающая popup, потем удаления модификатора класса popup_open
 function closeAllPopup(popup) {
   popup.classList.remove('popup_open');
+  
 }
-// закрытие popup по нажатию на overlay
+//закрытие popup по нажатию на Escape
+const closeClickEscape = (evt) => {
+  if (evt.key === 'Escape') {
+    closeAllPopup(popupEdit);
+    closeAllPopup(popupAdd);// здесь думаю лишнее действие функции, закрывает закрытые попап
+    closeAllPopup(popupImage);
+  }
+}
+//обработка клика по overlay
 const closeClickOverlay = (evt) => {
   if (evt.target.classList.contains('popup_open')) {
     evt.target.classList.remove('popup_open');
-  }
-};
-const closeClickEscape = (evt) => {
-  if (evt.key ==='Escape'){
-    closeAllPopup(popupEdit);
-    closeAllPopup(popupAdd);
-    closeAllPopup(popupImage);
-  }
-};
+  } 
+}
+
 //функция открывающая popup и отображает значения, который изначально отображается на странице
 function openPopupEdit() {
   inputName.value = profileTitle.textContent;
@@ -61,6 +70,7 @@ function form(evt) {
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputContent.value;
   closeAllPopup(popupEdit);
+  
 }
 //запуск функции form после обновления значения
 inputs.addEventListener('submit', form);
@@ -96,6 +106,7 @@ function deleteCard(evt) {
 function addClass(evt) {
   evt.target.classList.toggle('element__heart-button_active');
 }
+
 //функция отвечает за открытие картинки весь размер на экран popup-3
 function openPopupImage(element){
   const imgPlace = document.querySelector('.popup__image');
@@ -158,12 +169,3 @@ initialCards.forEach(addCard);
 const closePopupImage = document.querySelector('.popup__button_type_close-image');
 //закрытие при нажатии на крестик popup с картинкой на увеличенном экране
 closePopupImage.addEventListener('click', () => closeAllPopup(popupImage));
-
-
-document.addEventListener('keydown', (evt) => {
-  evt.target
-  if (evt.key === 'KeyEsc') {
-    console.log(evt.code);
-  }
-
-});
