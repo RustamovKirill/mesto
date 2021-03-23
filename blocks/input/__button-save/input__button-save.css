@@ -8,8 +8,9 @@
     padding-top: 14px;
     padding-bottom: 18px;
     background-color: rgba(0, 0, 0, 1);
+    border: 1px solid #000;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     outline: none;
 }
 .input__button-save:hover {

@@ -1,10 +1,14 @@
+//кнопки
 const openFormEdit = document.querySelector('#open-form'); //переменная кнопки открытия popup
 const closeFormEdit = document.querySelector('.popup__button_type_close-edit');//переменная кнопки закрытия popup
+//переменные 3х popup
 const popupEdit = document.querySelector('.popup_type_edit-prifile');//объявляем переменную с блоком popup
 const popupAdd = document.querySelector('.popup_type_add-element');//объявил переменную popup, которая добавляет карточку
 const popupImage = document.querySelector('.popup_type_show-image');//переменная блока popup с картинкой на весь экран
+//кнопки закрытия и открытия
 const openFormAdd = document.querySelector('.profile__add-button');//кнопка для открытия формы для добавления карточки с картинкой и названием
 const closeFormAdd = document.querySelector('.popup__button_type_close-add');
+
 //переменная с полем имени, тут будет отображаться текст веденный в поле textName
 const profileTitle = document.querySelector('.profile__title');
 //переменная с полем, где будет отображться информация записанная в переменную textSubtitle
@@ -14,9 +18,9 @@ const inputs = document.querySelector('.input');
 //переменна блока input добавляющая новую карточку на страницу
 const inputsAddCard = document.querySelector('.input_add-card');
 //объявляем переменную с полем ввода имени
-const textName = document.querySelector('.input__text_type_name');
+const inputName = document.querySelector('.input__text_type_name');
 //объявляем переменную с полем ввода описания
-const textSubtitle = document.querySelector('.input__text_type_content');
+const inputContent = document.querySelector('.input__text_type_content');
 //переменная контейнера с карточками
 const elements = document.querySelector('.elements');
 //переменная template контейнера
@@ -25,23 +29,37 @@ const templateContainer = document.querySelector('.template').content;
 //универсальная функция, которую в дальнейшем переиспозьем для открытия всех popup
 function openAllPopup(popup) {
   popup.classList.add('popup_open');
+  popup.addEventListener('click', closeClickOverlay);
+  document.addEventListener('keydown', closeClickEscape);
 }
 //функция закрывающая popup, потем удаления модификатора класса popup_open
-function closeAllPopup(form) {
-  form.classList.remove('popup_open');
+function closeAllPopup(popup) {
+  popup.classList.remove('popup_open');
 }
-
+// закрытие popup по нажатию на overlay
+const closeClickOverlay = (evt) => {
+  if (evt.target.classList.contains('popup_open')) {
+    evt.target.classList.remove('popup_open');
+  }
+};
+const closeClickEscape = (evt) => {
+  if (evt.key ==='Escape'){
+    closeAllPopup(popupEdit);
+    closeAllPopup(popupAdd);
+    closeAllPopup(popupImage);
+  }
+};
 //функция открывающая popup и отображает значения, который изначально отображается на странице
 function openPopupEdit() {
-  textName.value = profileTitle.textContent;
-  textSubtitle.value = profileSubtitle.textContent;
+  inputName.value = profileTitle.textContent;
+  inputContent.value = profileSubtitle.textContent;
   openAllPopup(popupEdit);
 }
 //функция отправляет изменения, которые были внесены в поля «Имя» и «О себе»
 function form(evt) {
   evt.preventDefault();
-  profileTitle.textContent = textName.value;
-  profileSubtitle.textContent = textSubtitle.value;
+  profileTitle.textContent = inputName.value;
+  profileSubtitle.textContent = inputContent.value;
   closeAllPopup(popupEdit);
 }
 //запуск функции form после обновления значения
@@ -55,12 +73,12 @@ openFormAdd.addEventListener('click', () => openAllPopup(popupAdd));
 closeFormAdd.addEventListener('click', () => closeAllPopup(popupAdd));
 
 //функция добавления новой карточки на страницу 
-function addNewCard(event) {
+function addNewCard(evt) {
   const typeTitle = document.querySelector('.input__text_type_title');// две переменные поля ввода 
   const typeLink = document.querySelector('.input__text_type_link');//в popup, в которых передаеться информация полей
-  event.preventDefault();
+  evt.preventDefault();
   //переменная хранит информацию внесенную в поля ввода 2го popup
-  const cardAdd = {name:typeTitle.value, link:typeLink.value}
+  const cardAdd = {name:typeTitle.value, link:typeLink.value};
   
   addCard(cardAdd);
   closeAllPopup(popupAdd);
@@ -74,7 +92,7 @@ inputsAddCard.addEventListener('submit', addNewCard);
 function deleteCard(evt) {
   evt.target.closest('.element').remove()
 }
-//
+//добавление лайка и удление
 function addClass(evt) {
   evt.target.classList.toggle('element__heart-button_active');
 }
@@ -140,3 +158,12 @@ initialCards.forEach(addCard);
 const closePopupImage = document.querySelector('.popup__button_type_close-image');
 //закрытие при нажатии на крестик popup с картинкой на увеличенном экране
 closePopupImage.addEventListener('click', () => closeAllPopup(popupImage));
+
+
+document.addEventListener('keydown', (evt) => {
+  evt.target
+  if (evt.key === 'KeyEsc') {
+    console.log(evt.code);
+  }
+
+});

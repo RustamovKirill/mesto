@@ -33,9 +33,11 @@
             <div class="popup__form">
                 <button type="button" class="popup__button popup__button_type_close-edit" aria-label="кнопка закрытия формы"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form name="form" class="input">
-                    <input type="text" name="name" class="input__text input__text_type_name" placeholder="Имя" required />
-                    <input type="text" name="content" class="input__text input__text_type_content" placeholder="Достижения" required />
+                <form name="edit" class="input" novalidate>
+                    <input type="text" name="name" id="name" class="input__text input__text_type_name" placeholder="Имя" minlength="2" maxlength="40" required />
+                    <span id="name-error" class="error"></span>
+                    <input type="text" name="content" id="content" class="input__text input__text_type_content" placeholder="О Себе" minlength="2" maxlength="200" required />
+                    <span id="content-error" class="error"></span>
                     <button type="submit" class="input__button-save" aria-label="кнопка сохранить">Сохранить</button>
                 </form>
             </div>
@@ -44,9 +46,11 @@
             <div class="popup__form">
                 <button type="button" class="popup__button popup__button_type_close-add" aria-label="кнопка закрытия формы"></button>
                 <h2 class="popup__title">Новое место</h2>
-                <form name="form" class="input input_add-card">
-                    <input type="text" name="description" class="input__text input__text_type_title" placeholder="Название" required />
-                    <input type="url" name="image" class="input__text input__text_type_link" placeholder="Ссылка на картинку" />
+                <form name="card" class="input input_add-card" novalidate>
+                    <input type="text" id="title" name="title" class="input__text input__text_type_title" placeholder="Название" minlength="2" maxlength="30" required />
+                    <span id="title-error" class="error"></span>
+                    <input type="url" id="link" name="link" class="input__text input__text_type_link" placeholder="Ссылка на картинку" required />
+                    <span id="link-error" class="error"></span>
                     <button type="submit" class="input__button-save" aria-label="кнопка создать">Создать</button>
                 </form>
             </div>
@@ -69,5 +73,6 @@
             </article>
         </template>
         <script src="script/index.js"></script>
+        <script src="script/validate.js"></script>
     </body>
 </html>
