@@ -27,34 +27,36 @@ const elements = document.querySelector('.elements');
 const templateContainer = document.querySelector('.template').content;
 
 //универсальная функция, которую в дальнейшем переиспозьем для открытия всех popup
-function openAllPopup(popup) {
-  const buttonSave = popup.querySelector('.input__button-save');
-  const inputsForm = Array.from(popup.querySelectorAll('.popup__text'));
+function openPopup(popup) {
+  const buttonSave = popup.querySelector(obj.submitButton);
+  const inputsForm = Array.from(popup.querySelectorAll(obj.inputSelector));
   //вызвали функцию переключения состояния кнопки submit,
   //чолбы проверять при каждом открытиттpopup
-  switchButton(inputsForm, buttonSave);
+  switchButton(inputsForm, buttonSave, obj);
   popup.classList.add('popup_open');
   document.addEventListener('keydown', closeClickEscape);
-  popup.addEventListener('click', closeClickOverlay);
-  
 }
+// навешиваем слушателя на попап, для закрытия кликом по overlay
+const popupList = Array.from(document.querySelectorAll('.popup'));
+popupList.forEach(popup => {
+popup.addEventListener('click', closeClickOverlay);
+});
 //функция закрывающая popup, потем удаления модификатора класса popup_open
-function closeAllPopup(popup) {
+function closePopup(popup) {
   popup.classList.remove('popup_open');
-  
+  document.removeEventListener('keydown', closeClickEscape);
 }
 //закрытие popup по нажатию на Escape
 const closeClickEscape = (evt) => {
   if (evt.key === 'Escape') {
-    closeAllPopup(popupEdit);
-    closeAllPopup(popupAdd);// здесь думаю лишнее действие функции, закрывает закрытые попап
-    closeAllPopup(popupImage);
+    const openClass = document.querySelector('.popup_open');
+    closePopup(openClass);
   }
 }
-//обработка клика по overlay
-const closeClickOverlay = (evt) => {
+//функция закрытия попап путем нажатия на overlay
+function closeClickOverlay (evt) {
   if (evt.target.classList.contains('popup_open')) {
-    evt.target.classList.remove('popup_open');
+    closePopup(evt.target);
   } 
 }
 
@@ -62,25 +64,26 @@ const closeClickOverlay = (evt) => {
 function openPopupEdit() {
   inputName.value = profileTitle.textContent;
   inputContent.value = profileSubtitle.textContent;
-  openAllPopup(popupEdit);
+  openPopup(popupEdit);
 }
+
 //функция отправляет изменения, которые были внесены в поля «Имя» и «О себе»
-function form(evt) {
+function handleProfileSumbit(evt) {
   evt.preventDefault();
   profileTitle.textContent = inputName.value;
   profileSubtitle.textContent = inputContent.value;
-  closeAllPopup(popupEdit);
+  closePopup(popupEdit);
   
 }
 //запуск функции form после обновления значения
-inputs.addEventListener('submit', form);
+inputs.addEventListener('submit', handleProfileSumbit);
 //слушатель открытия формы
 openFormEdit.addEventListener('click', openPopupEdit);
 //дейсвие по нажатию на кнопку Х, закрытие формы
-closeFormEdit.addEventListener('click', () => closeAllPopup(popupEdit));
+closeFormEdit.addEventListener('click', () => closePopup(popupEdit));
 //открытие и закрытие popup-2 при нажатии на соответсвующие кнопки
-openFormAdd.addEventListener('click', () => openAllPopup(popupAdd));
-closeFormAdd.addEventListener('click', () => closeAllPopup(popupAdd));
+openFormAdd.addEventListener('click', () => openPopup(popupAdd));
+closeFormAdd.addEventListener('click', () => closePopup(popupAdd));
 
 //функция добавления новой карточки на страницу 
 function addNewCard(evt) {
@@ -89,9 +92,8 @@ function addNewCard(evt) {
   evt.preventDefault();
   //переменная хранит информацию внесенную в поля ввода 2го popup
   const cardAdd = {name:typeTitle.value, link:typeLink.value};
-  
   addCard(cardAdd);
-  closeAllPopup(popupAdd);
+  closePopup(popupAdd);
 //делам пустые значения полей ввода при повторном откритии popup формы для внесения новой карточки
   typeTitle.value = '';
   typeLink.value = '';
@@ -103,18 +105,20 @@ function deleteCard(evt) {
   evt.target.closest('.element').remove()
 }
 //добавление лайка и удление
-function addClass(evt) {
+function handleLikeClick(evt) {
   evt.target.classList.toggle('element__heart-button_active');
 }
 
 //функция отвечает за открытие картинки весь размер на экран popup-3
 function openPopupImage(element){
+  popupImage.classList.add('popup_open');
+  document.addEventListener('keydown', closeClickEscape);
+  popupImage.addEventListener('click', closeClickOverlay);
   const imgPlace = document.querySelector('.popup__image');
   const subTitleImg = document.querySelector('.popup__subtitle-image');
   imgPlace.src = element.link;
   imgPlace.alt = element.name;
   subTitleImg.textContent = element.name;
-  openAllPopup(popupImage);
 }
 //массив с неизменным числом карточек
 const initialCards = [
@@ -156,7 +160,7 @@ function renderCards(element) {
   const delButton = initialCardsElement.querySelector('.element__basket-button');
   const clickImage = initialCardsElement.querySelector('.element__image');
   clickImage.addEventListener('click', () => openPopupImage(element));//действие при нажатии на картинку
-  like.addEventListener('click', addClass);//действие по нажатию на сердечко
+  like.addEventListener('click', handleLikeClick);//действие по нажатию на сердечко
   delButton.addEventListener('click', deleteCard);//действие при нажатие на корзину
   //elements.prepend(initialCardsElement);
   return initialCardsElement;
@@ -168,4 +172,4 @@ initialCards.forEach(addCard);
 //закрытие popup картинки 
 const closePopupImage = document.querySelector('.popup__button_type_close-image');
 //закрытие при нажатии на крестик popup с картинкой на увеличенном экране
-closePopupImage.addEventListener('click', () => closeAllPopup(popupImage));
+closePopupImage.addEventListener('click', () => closePopup(popupImage));
