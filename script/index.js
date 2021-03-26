@@ -28,11 +28,6 @@ const templateContainer = document.querySelector('.template').content;
 
 //универсальная функция, которую в дальнейшем переиспозьем для открытия всех popup
 function openPopup(popup) {
-  const buttonSave = popup.querySelector(obj.submitButton);
-  const inputsForm = Array.from(popup.querySelectorAll(obj.inputSelector));
-  //вызвали функцию переключения состояния кнопки submit,
-  //чолбы проверять при каждом открытиттpopup
-  switchButton(inputsForm, buttonSave, obj);
   popup.classList.add('popup_open');
   document.addEventListener('keydown', closeClickEscape);
 }
@@ -78,11 +73,27 @@ function handleProfileSumbit(evt) {
 //запуск функции form после обновления значения
 inputs.addEventListener('submit', handleProfileSumbit);
 //слушатель открытия формы
-openFormEdit.addEventListener('click', openPopupEdit);
+openFormEdit.addEventListener('click', () => {
+//вызвали функцию переключения состояния кнопки submit,
+//чолбы проверять при каждом открытиттpopup
+  const buttonSave = popupEdit.querySelector(obj.submitButton);
+  const inputsForm = Array.from(popupEdit.querySelectorAll(obj.inputSelector));
+  switchButton(inputsForm, buttonSave, obj);
+  openPopupEdit();
+});
 //дейсвие по нажатию на кнопку Х, закрытие формы
 closeFormEdit.addEventListener('click', () => closePopup(popupEdit));
 //открытие и закрытие popup-2 при нажатии на соответсвующие кнопки
-openFormAdd.addEventListener('click', () => openPopup(popupAdd));
+openFormAdd.addEventListener('click', () => {
+//вызвали функцию переключения состояния кнопки submit,
+//чолбы проверять при каждом открытиттpopup
+  const buttonSave = popupAdd.querySelector(obj.submitButton);
+  const inputsForm = Array.from(popupAdd.querySelectorAll(obj.inputSelector));
+  switchButton(inputsForm, buttonSave, obj);
+  openPopup(popupAdd);
+});
+
+
 closeFormAdd.addEventListener('click', () => closePopup(popupAdd));
 
 //функция добавления новой карточки на страницу 
@@ -111,8 +122,7 @@ function handleLikeClick(evt) {
 
 //функция отвечает за открытие картинки весь размер на экран popup-3
 function openPopupImage(element){
-  popupImage.classList.add('popup_open');
-  document.addEventListener('keydown', closeClickEscape);
+  openPopup(popupImage);
   popupImage.addEventListener('click', closeClickOverlay);
   const imgPlace = document.querySelector('.popup__image');
   const subTitleImg = document.querySelector('.popup__subtitle-image');
