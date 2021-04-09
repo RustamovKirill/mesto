@@ -52,6 +52,7 @@
 @import url("../blocks/input/__text/_type/input__text_type_title.css");
 @import url("../blocks/input/__text/_type/input__text_type_link.css");
 @import url("../blocks/input/_add-card/input_add-card.css");
+@import url("../blocks/input/_edit-profile/input_edit-profile.css");
 @import url("../blocks/input/__text/_error/input__text_error.css");
 @import url("../blocks/input/__button-save/_disabled/input__button-save_disabled.css");
 /*error*/
