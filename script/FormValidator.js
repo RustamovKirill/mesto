@@ -53,6 +53,7 @@ export default class FormValidator {
                 });
              //вызываем функцию, чтобы кнопка добавить была не активна при открытии формы
              this.switchButton(allInputs, buttonElement);
+            
             });
         };
      enableValidation() {

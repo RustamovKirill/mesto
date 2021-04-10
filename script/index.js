@@ -2,8 +2,9 @@ import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import 
 {initialCards,
-object,
+object, submitButton,
 formEdit, formAdd,
+typeTitle, typeLink,
 openFormEdit, closeFormEdit,
 openFormAdd, closeFormAdd,
 popupEdit, popupAdd, popupImage,
@@ -15,10 +16,20 @@ initialCards.forEach((item) => {
   //Добавляем в DOM
   document.querySelector('.elements').prepend(cardElement);
 });
+//блок валидации форм
+const validatorEditForm = new FormValidator (object, formEdit);
+  validatorEditForm.enableValidation();
+const validatorAddForm = new FormValidator (object, formAdd);
+  validatorAddForm.enableValidation();
+//закрыте картинки по overlay
+popupImage.addEventListener('click', closeClickOverlay);
 
 //универсальная функция, которую в дальнейшем использую для открытия всех popup
 function openPopup(popup) {
   popup.classList.add('popup_open');
+  submitButton.forEach((button) =>{
+    button.classList.add(object.disableSubmitButton);
+    button.setAttribute('disabled', 'disabled')});
   document.addEventListener('keydown', closeClickEscape);
 }
 // навешиваем слушателя на попап, для закрытия кликом по overlay
@@ -63,26 +74,18 @@ function handleProfileSumbit(evt) {
 inputs.addEventListener('submit', handleProfileSumbit);
 //слушатель открытия формы
 openFormEdit.addEventListener('click', () => {
-  const validatorEditForm = new FormValidator (object, formEdit);
-  validatorEditForm.enableValidation();
   openPopupEdit();
 });
 //дейсвие по нажатию на кнопку Х, закрытие формы
 closeFormEdit.addEventListener('click', () => closePopup(popupEdit));
 //открытие и закрытие popup-2 при нажатии на соответсвующие кнопки
 openFormAdd.addEventListener('click', () => {
-  const validatorAddForm = new FormValidator (object, formAdd);
-  validatorAddForm.enableValidation();
   openPopup(popupAdd);
 });
 closeFormAdd.addEventListener('click', () => closePopup(popupAdd));
-
 //функция добавления новой карточки на страницу 
 function addNewCard(evt) {
   evt.preventDefault();
-  //поля input для ввода информации для новой карточки
-  const typeTitle = document.querySelector('.input__text_type_title'); 
-  const typeLink = document.querySelector('.input__text_type_link');
   //информация введенная в поля input хранится в переменой
   const cardAdd = {name:typeTitle.value, link:typeLink.value};
   const newCard = new Card (cardAdd, '.template');
@@ -99,7 +102,6 @@ inputsAddCard.addEventListener('submit', addNewCard);
 //функция отвечает за открытие картинки весь размер на экран popup-3
 export function openPopupImage(){
   openPopup(popupImage);
-  popupImage.addEventListener('click', closeClickOverlay);
 }
 const closePopupImage = document.querySelector('.popup__button_type_close-image');
 //закрытие при нажатии на крестик popup с картинкой на увеличенном экране
