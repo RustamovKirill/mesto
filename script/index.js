@@ -1,28 +1,25 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import Popup from './Popup.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
-const template = '.element'
+
 import 
 {initialCards,
 object, submitButton,
 formEdit, formAdd,
-typeTitle, typeLink,
-openFormEdit, closeFormEdit,
-openFormAdd, closeFormAdd,
-popupEdit, popupAdd, popupImage,
-profileTitle, profileSubtitle, inputs, inputName, inputContent} from './constants.js';
+openFormEdit,
+openFormAdd,
+profileTitle, profileSubtitle, inputName, inputContent} from './constants.js';
 
-//блок валидации форм
-const validatorEditForm = new FormValidator (object, formEdit);
-  validatorEditForm.enableValidation();
-const validatorAddForm = new FormValidator (object, formAdd);
-  validatorAddForm.enableValidation();
-////////////////////////////////////////
 
+//функция отклбчения кнопки Submit
+function disabledButton() {
+  submitButton.forEach((button) =>{
+  button.classList.add(object.disableSubmitButton);
+  button.setAttribute('disabled', 'disabled')});
+}
 ///////////////////////////////////////////////////////
 const popupFullScreen = new PopupWithImage ('.popup_type_show-image');
 // callback открытия картинки в overlay
@@ -43,12 +40,14 @@ cardList.rendererItems();
 //////////////////////////////////////
 /*Ошибка где то в этом месте*/
   const popupNewCard = new PopupWithForm('.popup_type_add-element', (item) => {
-      const newСard = new Card(item.link, item.name, template, callBackFunction).renderCard();
+      const newСard = new Card(item.link, item.title, callBackFunction).renderCard();
       cardList.addItem(newСard);
       popupNewCard.close();
   });
 openFormAdd.addEventListener('click', ()=> {
   popupNewCard.open();
+  // отключаю кноку submit
+  disabledButton();
 });
 
 
@@ -65,16 +64,18 @@ const newEditPopup = new PopupWithForm('.popup_type_edit-profile', (data) => {
 openFormEdit.addEventListener('click', () => {
   newEditPopup.open();
   const {name, content} = userInfo.getUserInfo();
-
   inputName.value = name;
   inputContent.value = content;
+  // отключаю кноку submit
+  disabledButton();
 });
 newEditPopup.setEventLesteners();
 popupFullScreen.setEventLesteners();
 popupNewCard.setEventLesteners();
 
-
-
-
-
+//блок валидации форм
+const validatorEditForm = new FormValidator (object, formEdit);
+  validatorEditForm.enableValidation();
+const validatorAddForm = new FormValidator (object, formAdd);
+  validatorAddForm.enableValidation();
 
