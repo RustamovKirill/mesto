@@ -36,13 +36,13 @@ export const initialCards = [
 export const formEdit = document.querySelector('.input_edit-profile');
 export const formAdd = document.querySelector('.input_add-card');
   //кнопки popupEdit
-export const openFormEdit = document.querySelector('#open-form');
+export const openFormEdit = document.querySelector('.profile__edit-button');
 export const closeFormEdit = document.querySelector('.popup__button_type_close-edit');
   //кнопки popupAdd
 export const openFormAdd = document.querySelector('.profile__add-button');
 export const closeFormAdd = document.querySelector('.popup__button_type_close-add');
   //переменные 3х popup
-export const popupEdit = document.querySelector('.popup_type_edit-prifile');
+export const popupEdit = document.querySelector('.popup_type_edit-profile');
 export const popupAdd = document.querySelector('.popup_type_add-element');
 export const popupImage = document.querySelector('.popup_type_show-image');
 //поля input для ввода информации для новой карточки
