@@ -1,4 +1,4 @@
-import FormValidator from './components/FormValidator.js';
+import FormValidator from '../pages/FormValidator.js';
 import Card from './components/Card.js';
 import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
@@ -7,46 +7,44 @@ import UserInfo from './components/UserInfo.js';
 import '../pages/index.css'; // импортировали стили проекта
 import 
 {initialCards,
-object, submitButton,
+validationConfig,
+selectorImageOverlay, selectorAddCard, selectorEditProfile, selectorContainer,
 formEdit, formAdd,
 openFormEdit,
 openFormAdd,
 profileTitle, profileSubtitle, inputName, inputContent} from './utils/constants.js';
 
-
-//функция отключения Submit
-function disabledButton() {
-  submitButton.forEach((button) =>{
-  button.classList.add(object.disableSubmitButton);
-  button.setAttribute('disabled', 'disabled')});
-}
-
-const popupFullScreen = new PopupWithImage ('.popup_type_show-image');
+const popupFullScreen = new PopupWithImage (selectorImageOverlay);
 // callback открытия картинки в overlay
 function callBackFunction(link, name) {
   popupFullScreen.open(link, name);
 }
+// ф-ция создания карточки
+function createCard(item) {
+  const card = new Card (item.link, item.name, callBackFunction).renderCard();
+    //const cardElement = card.renderCard();
+    cardList.addItem(card);
+} 
 
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item.link, item.name, callBackFunction);
-    const cardElement = card.renderCard();
-    cardList.addItem(cardElement);
+    createCard(item)
   }
-},'.elements');
+}, selectorContainer);
 cardList.rendererItems();
 
 
-  const popupNewCard = new PopupWithForm('.popup_type_add-element', (item) => {
-      const newСard = new Card(item.link, item.title, callBackFunction).renderCard();
-      cardList.addItem(newСard);
-      popupNewCard.close();
+  const popupNewCard = new PopupWithForm(selectorAddCard, (item) => {
+    createCard(item)
+    // закрытие popup после submit
+    popupNewCard.close();
   });
 openFormAdd.addEventListener('click', ()=> {
+  // сбрасываем поля импутов, чтоб исключить появление текста для невалидных строк и отключаю кноку submit
+  validatorAddForm.disableSubmitResetInput();
   popupNewCard.open();
-  // отключаю кноку submit
-  disabledButton();
+  
 });
 
 
@@ -56,25 +54,24 @@ const userInfo = new UserInfo({
   userContent:  profileSubtitle
 });
 
-const newEditPopup = new PopupWithForm('.popup_type_edit-profile', (data) => {
+const newEditPopup = new PopupWithForm(selectorEditProfile, (data) => {
   userInfo.setUserInfo(data); 
   newEditPopup.close(); 
 });
 openFormEdit.addEventListener('click', () => {
+   // сбрасываем поля импутов, чтоб исключить появление текста для невалидных строк и отключаю кноку submit
+  validatorEditForm.disableSubmitResetInput();
   newEditPopup.open();
   const {name, content} = userInfo.getUserInfo();
   inputName.value = name;
   inputContent.value = content;
-  // отключаю кноку submit
-  disabledButton();
 });
 newEditPopup.setEventLesteners();
 popupFullScreen.setEventLesteners();
 popupNewCard.setEventLesteners();
 
 //блок валидации форм
-const validatorEditForm = new FormValidator (object, formEdit);
+const validatorEditForm = new FormValidator (validationConfig, formEdit);
   validatorEditForm.enableValidation();
-const validatorAddForm = new FormValidator (object, formAdd);
+const validatorAddForm = new FormValidator (validationConfig, formAdd);
   validatorAddForm.enableValidation();
-

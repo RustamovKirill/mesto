@@ -2,6 +2,44 @@
 export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
+    }
+    _handleEscapeClose = (evt) => {
+        if (evt.key === 'Escape') {
+            this.close();
+        }
+    }
+    _handleClickOverlay = (evt) =>{
+        if (evt.target.classList.contains('popup_open')) {
+            this.close()
+        } 
+    }
+
+    setEventLesteners() {
+        this._popup.addEventListener('click', (evt) => this._handleClickOverlay(evt))
+        this._buttonClose = this._popup.querySelector('.popup__button');
+        this._buttonClose.addEventListener('click', (evt) => this.close(evt))
+    }
+    open() {
+        this._popup.classList.add('popup_open');
+        document.addEventListener('keydown', (evt) => this._handleEscapeClose(evt))
+        
+    }
+                        /*возможно я снолва ошибся исправляя замечание*/
+    _removeEventListeners() {
+        document.removeEventListener('keydown', () => this._handleEscapeClose);
+        this._popup.removeEventListener('click', () => this._handleClickOverlay);
+        this._buttonClose.removeEventListener('click', () => this.close);
+    }
+    close() {
+        this._popup.classList.remove('popup_open');
+        this._removeEventListeners();
+    }
+}
+
+/*
+export default class Popup {
+    constructor(popupSelector) {
+        this._popup = document.querySelector(popupSelector);
         this._buttonClose = this._popup.querySelector('.popup__button');
     }
     _handleEscapeClose(evt) {
@@ -35,3 +73,4 @@ export default class Popup {
         this._popup.classList.remove('popup_open');
     }
 }
+*/

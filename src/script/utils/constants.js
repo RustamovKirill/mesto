@@ -24,7 +24,7 @@ export const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
- export const object = {
+ export const validationConfig = {
     formSelector: '.input',
     inputSelector: '.input__text',
     submitButton: '.input__button-save',
@@ -32,7 +32,12 @@ export const initialCards = [
     inputError: 'input__text_error',
     errorClass: 'error_visible'
   }
-  //формы
+  // Селекторы
+export const selectorImageOverlay = '.popup_type_show-image';
+export const selectorAddCard = '.popup_type_add-element';
+export const selectorEditProfile = '.popup_type_edit-profile';
+export const selectorContainer = '.elements';
+  // Формы
 export const formEdit = document.querySelector('.input_edit-profile');
 export const formAdd = document.querySelector('.input_add-card');
   //кнопки popupEdit
@@ -54,4 +59,4 @@ export const profileSubtitle = document.querySelector('.profile__subtitle');
 export const inputs = document.querySelector('.input');
 export const inputName = document.querySelector('.input__text_type_name');
 export const inputContent = document.querySelector('.input__text_type_content');
-export const submitButton = document.querySelectorAll('.input__button-save');
+//export const submitButton = document.querySelectorAll('.input__button-save');
