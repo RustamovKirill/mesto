@@ -1,26 +1,26 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
-
+import FormValidator from './components/FormValidator.js';
+import Card from './components/Card.js';
+import Section from './components/Section.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
+import '../pages/index.css'; // импортировали стили проекта
 import 
 {initialCards,
 object, submitButton,
 formEdit, formAdd,
 openFormEdit,
 openFormAdd,
-profileTitle, profileSubtitle, inputName, inputContent} from './constants.js';
+profileTitle, profileSubtitle, inputName, inputContent} from './utils/constants.js';
 
 
-//функция отклбчения кнопки Submit
+//функция отключения Submit
 function disabledButton() {
   submitButton.forEach((button) =>{
   button.classList.add(object.disableSubmitButton);
   button.setAttribute('disabled', 'disabled')});
 }
-///////////////////////////////////////////////////////
+
 const popupFullScreen = new PopupWithImage ('.popup_type_show-image');
 // callback открытия картинки в overlay
 function callBackFunction(link, name) {
@@ -37,8 +37,7 @@ const cardList = new Section({
 },'.elements');
 cardList.rendererItems();
 
-//////////////////////////////////////
-/*Ошибка где то в этом месте*/
+
   const popupNewCard = new PopupWithForm('.popup_type_add-element', (item) => {
       const newСard = new Card(item.link, item.title, callBackFunction).renderCard();
       cardList.addItem(newСard);
