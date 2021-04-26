@@ -62,8 +62,8 @@ openFormEdit.addEventListener('click', () => {
    // сбрасываем поля импутов, чтоб исключить появление текста для невалидных строк и отключаю кноку submit
   validatorEditForm.disableSubmitResetInput();
   newEditPopup.open();
-  const {name, content} = userInfo.getUserInfo();
-  inputName.value = name;
+  const {title, content} = userInfo.getUserInfo();
+  inputName.value = title;
   inputContent.value = content;
 });
 newEditPopup.setEventLesteners();
