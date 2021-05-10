@@ -8,6 +8,10 @@
 @import url("../blocks/main/main.css");
 /*секция profile*/
 @import url("../blocks/profile/profile.css");
+
+@import url("../blocks/profile/__avatar-button/profile__avatar-button.css");
+@import url("../blocks/profile/__user-avatar/profile__user-avatar.css");
+
 @import url("../blocks/profile/__avatar/profile__avatar.css");
 @import url("../blocks/profile/__info/profile__info.css");
 @import url("../blocks/profile/__title/profile__title.css");
@@ -40,17 +44,24 @@
 @import url("../blocks/popup/_type/popup_type_edit-profile.css");
 @import url("../blocks/popup/_type/popup_type_add-element.css");
 @import url("../blocks/popup/_type/popup_type_show-image.css");
+@import url("../blocks/popup/_type/popup_type_delete-image.css");
+@import url("../blocks/popup/_type/popup_type_add-avatar.css");
 @import url("../blocks/popup/__button/_type/popup__button_type_close-edit.css");
 @import url("../blocks/popup/__button/_type/popup__button_type_close-add.css");
 @import url("../blocks/popup/__button/_type/popup__button_type_close-image.css");
+@import url("../blocks/popup/__button/_type/popup__button_type_close-delete.css");
+@import url("../blocks/popup/__button/_type/popup__button_type_close-avatar.css");
 /*блок input*/
 @import url("../blocks/input/input.css");
 @import url("../blocks/input/__text/input__text.css");
 @import url("../blocks/input/__button-save/input__button-save.css");
+@import url("../blocks/input/__button-yes/input__button-yes.css");
+@import url("../blocks/input/_delete-card/input_delete-card.css");
 @import url("../blocks/input/__text/_type/input__text_type_name.css");
 @import url("../blocks/input/__text/_type/input__text_type_content.css");
 @import url("../blocks/input/__text/_type/input__text_type_title.css");
 @import url("../blocks/input/__text/_type/input__text_type_link.css");
+@import url("../blocks/input/__text/_type/input__text_type_avatar");
 @import url("../blocks/input/_add-card/input_add-card.css");
 @import url("../blocks/input/_edit-profile/input_edit-profile.css");
 @import url("../blocks/input/__text/_error/input__text_error.css");

@@ -1,0 +1,8 @@
+.profile__user-avatar {
+    width: 120px;
+    height: 120px;
+    position: relative;
+}
+.profile__user-avatar:hover .profile__avatar-button {
+    opacity: 1;
+  }

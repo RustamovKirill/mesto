@@ -4,6 +4,7 @@ import Section from '../script/components/Section.js';
 import PopupWithImage from '../script/components/PopupWithImage.js';
 import PopupWithForm from '../script/components/PopupWithForm.js';
 import UserInfo from '../script/components/UserInfo.js';
+import Api from '../script/components/Api.js';
 import './index.css'; // импортировали стили проекта
 import 
 {initialCards,
@@ -14,6 +15,16 @@ openFormEdit,
 openFormAdd,
 profileTitle, profileSubtitle, inputName, inputContent} from '../script/utils/constants.js';
 
+// экземпляр класса Api
+const api = new Api ({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-23',
+  headers: {
+    authorization: '7cd3c8f5-5eec-4d82-828a-e3126113c61b',
+    'Content-Type': 'application/json'
+  }
+});
+
+
 const popupFullScreen = new PopupWithImage (selectorImageOverlay);
 // callback открытия картинки в overlay
 function callBackFunction(link, name) {
@@ -22,8 +33,6 @@ function callBackFunction(link, name) {
 // ф-ция создания карточки
 function createCard(item) {
   const card = new Card (item.link, item.name, callBackFunction).renderCard();
-    //const cardElement = card.renderCard();
-    //cardList.addItem(card);
     return card
 }
 // ф-ция добавления карточки
@@ -45,7 +54,7 @@ cardList.rendererItems();
   const popupAddCard = new PopupWithForm(selectorAddCard, (item) => {
     const card = createCard(item); //вызов  ф-ции создания карточки
     addCardToDom(card); //вызов  ф-ции добавления карточки
-    
+
     // закрытие popup после submit
     popupAddCard.close();
   });
@@ -84,26 +93,23 @@ const validatorEditForm = new FormValidator (validationConfig, formEdit);
   validatorEditForm.enableValidation();
 const validatorAddForm = new FormValidator (validationConfig, formAdd);
   validatorAddForm.enableValidation();
-
+///////////////////////////////////
+function updateQuote() {
+  let quoteElement = document.querySelector('.profile__subtitle');
+fetch('https://api.kanye.rest')
+.then((res) => {
+    return res.json(); // возвращаем результат работы метода и идём в следующий then
+  })
+.then((data) => {
+  quoteElement.textContent = data.quote;
+})
+  
+}
+document.querySelector('.profile__avatar').addEventListener('click', updateQuote)
+//////////////////////////////
 
   /*
-import FormValidator from '../script/components/FormValidator.js';
-import Card from '../script/components/Card.js';
-import Section from '../script/components/Section.js';
-import PopupWithImage from '../script/components/PopupWithImage.js';
-import PopupWithForm from '../script/components/PopupWithForm.js';
-import UserInfo from '../script/components/UserInfo.js';
-import './index.css'; // импортировали стили проекта
-import 
-{initialCards,
-validationConfig,
-selectorImageOverlay, selectorAddCard, selectorEditProfile, selectorContainer,
-formEdit, formAdd,
-openFormEdit,
-openFormAdd,
-profileTitle, profileSubtitle, inputName, inputContent} from '../script/utils/constants.js';
-
-const popupFullScreen = new PopupWithImage (selectorImageOverlay);
+  const popupFullScreen = new PopupWithImage (selectorImageOverlay);
 // callback открытия картинки в overlay
 function callBackFunction(link, name) {
   popupFullScreen.open(link, name);
@@ -111,21 +117,28 @@ function callBackFunction(link, name) {
 // ф-ция создания карточки
 function createCard(item) {
   const card = new Card (item.link, item.name, callBackFunction).renderCard();
-    //const cardElement = card.renderCard();
-    cardList.addItem(card);
-} 
+    return card
+}
+// ф-ция добавления карточки
+function addCardToDom(card) {
+  cardList.addItem(card);
+}
 
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    createCard(item)
+    
+    const card = createCard(item); //вызов  ф-ции создания карточки
+    addCardToDom(card); //вызов  ф-ции добавления карточки
   }
 }, selectorContainer);
 cardList.rendererItems();
 
 
   const popupAddCard = new PopupWithForm(selectorAddCard, (item) => {
-    createCard(item)
+    const card = createCard(item); //вызов  ф-ции создания карточки
+    addCardToDom(card); //вызов  ф-ции добавления карточки
+
     // закрытие popup после submit
     popupAddCard.close();
   });
@@ -155,14 +168,13 @@ openFormEdit.addEventListener('click', () => {
   inputName.value = title;
   inputContent.value = content;
 });
-popupEditProfile.setEventLesteners();
-popupFullScreen.setEventLesteners();
-popupAddCard.setEventLesteners();
+popupEditProfile.setEventListener();
+popupFullScreen.setEventListener();
+popupAddCard.setEventListener();
 
 //блок валидации форм
 const validatorEditForm = new FormValidator (validationConfig, formEdit);
   validatorEditForm.enableValidation();
 const validatorAddForm = new FormValidator (validationConfig, formAdd);
   validatorAddForm.enableValidation();
-
   */

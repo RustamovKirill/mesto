@@ -12,7 +12,10 @@
         </header>
         <main class="main">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/cousteau.jpg')%>" alt="жак-ив-кусто" />
+                <div class="profile__user-avatar">
+                    <button type="button" class="profile__avatar-button"></button>
+                    <img class="profile__avatar" src="<%=require('./images/cousteau.jpg')%>" alt="жак-ив-кусто" />
+                </div>
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <p class="profile__subtitle">Исследователь океана</p>
@@ -58,6 +61,26 @@
                 <button type="button" class="popup__button popup__button_type_close-image" aria-label="кнопка закрытия формы"></button>
                 <img class="popup__image" src="#" alt="-">
                 <p class="popup__subtitle-image"></p>
+            </div>
+        </div>
+        <div class="popup popup_type_delete-image">
+            <div class="popup__form">
+                <button type="button" class="popup__button popup__button_type_close-delete" aria-label="кнопка закрытия формы"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+                <div class="input_delete-card">
+                    <button type="submit" class="input__button-yes" aria-label="кнопка Да">Да</button>
+                </div>
+            </div>
+        </div>
+        <div class="popup popup_type_add-avatar">
+            <div class="popup__form">
+                <button type="button" class="popup__button popup__button_type_close-avatar" aria-label="кнопка закрытия формы"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form name="new-avatar" class="input input_add-avatar" novalidate>
+                    <input type="url" id="avatar" name="avatar" class="input__text input__text_type_avatar" placeholder="Ссылка на картинку" required />
+                    <span id="avatar-error" class="error"></span>
+                    <button type="submit" class="input__button-save" aria-label="кнопка сохранить">Сохранить</button>
+                </form>
             </div>
         </div>
         <template class="template">
