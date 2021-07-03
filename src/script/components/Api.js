@@ -1,6 +1,7 @@
 export default class Api{
     constructor(config) {
-        this.url = config.url;
+        this.config = config
+        this.url = config.baseUrl;
         this.headers = config.headers;
     }
     
@@ -12,70 +13,55 @@ export default class Api{
         }
     // загрузка информации о пользователе с сервера
     getUserInfo() {
-            return fetch(`${this.url}/users/me`, {
-                method: 'GET',
-                headers: this.headers
-            }).then(res => this.checkJSONRes(res));
+            return fetch(`${this.url}/users/me`, this.config).then(res => this.checkJSONRes(res));
         }
-
     // загрузка карточек с сервера
     getInitialCards() {
-        return fetch(`${this.url}/cards`, {
-          method: 'GET',
-          headers: this._headers
-        }).then(res => this.checkJSONRes(res));
+        return fetch(`${this.url}/cards`, this.config).then(res => this.checkJSONRes(res));
       }
     // редактирование профиля
-    addUserInfo(name, about) {
+    addUserInfo(values) {
         return fetch(`${this.url}/users/me`, {
           method: 'PATCH',
           headers: this.headers,
-          body: JSON.stringify({
-            name,
-            about
-          }),
+          body: JSON.stringify(values),
         }).then(res => this.checkJSONRes(res));
     }
     // добавленеи новой карточки
-    addNewCards(name, link) {
+    addNewCards(values) {
         return fetch(`${this.url}/cards`, {
           method: 'POST',
-          headers: this._headers,
-          body: JSON.stringify({
-            name,
-            link,
-          }),
+          headers: this.headers,
+          body: JSON.stringify(values),
           }).then(res => this.checkJSONRes(res));
     }
     // добавление аватарки
-    addNewAvatar(link) {
-        return fetch(`${this.baseUrl}/users/me/avatar`, {
+    addNewAvatar(value) {
+        return fetch(`${this.url}/users/me/avatar`, {
           method: 'PATCH',
           headers: this.headers,
-          body: JSON.stringify({
-            avatar: link,
-          }),
+          body: JSON.stringify(value),
         }).then(res => this.checkJSONRes(res));
     }
     // проставляем лайки
     likeCard(cardId) {
-        return fetch(`${this.baseUrl}/cards/like/${cardId}`, {
+        return fetch(`${this.url}/cards/likes/${cardId}`, {
           method: 'PUT',
           headers: this.headers,
         }).then(res => this.checkJSONRes(res));
     }
     // удаление карточек
     deleteCard(cardId) {
-        return fetch(`${this.baseUrl}/cards/${cardId}`, {
+        return fetch(`${this.url}/cards/${cardId}`, {
           method: 'DELETE',
           headers: this.headers,
         }).then(res => this.checkJSONRes(res));
     }
     // снимаем лайк с карточки
     deleteLikeCard(cardId) {
-        return fetch(`${this.baseUrl}/cards/like/${cardId}`, {
+        return fetch(`${this.url}/cards/likes/${cardId}`, {
           method: 'DELETE',
           headers: this.headers,
-        }).then(res => this.checkJSONRe(res));
+        }).then(res => this.checkJSONRes(res));
     }
 }

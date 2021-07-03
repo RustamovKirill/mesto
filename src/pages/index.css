@@ -29,6 +29,9 @@
 @import url("../blocks/element/__heart-button/element__heart-button.css");
 @import url("../blocks/element/__image/element__image.css");
 @import url("../blocks/element/__heart-button/_active/element__heart-button_active.css");
+@import url('../blocks/element/__like-box/element__like-box.css');
+@import url('../blocks/element/__likes-counter/element__likes-counter.css');
+@import url('../blocks/element/__basket-button/_on/element__basket-button_on.css');
 /*секция footer*/
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__subtitle/footer__subtitle.css");

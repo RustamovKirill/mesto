@@ -11,6 +11,7 @@
     background-image: url("../../../images/trash.svg");
     cursor: pointer;
     opacity: 1;
+    visibility: hidden;
 }
 .element__basket-button:hover {
     opacity: 0.6;

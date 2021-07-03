@@ -1,18 +1,17 @@
 export default class UserInfo {
-  constructor({ userName, userContent }) {
-    this._title = userName;
-    this._content = userContent;
-  };
+  constructor(data) {
+    this._data = data
+  }
 // метод возвращающий объект с данными пользователя
   getUserInfo() {
     return {
-      title: this._title.textContent,
-      content: this._content.textContent
+      name: this._data.name.textContent,
+      about: this._data.about.textContent
     };
   };
 // метод принимающий данные пользователя и добавляющий их на страницу
   setUserInfo(data) {
-    this._title.textContent = data.title;
-    this._content.textContent = data.content;
+    this._data.name.textContent = data.name,
+    this._data.about.textContent = data.about
   };
 };

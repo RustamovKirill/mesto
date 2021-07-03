@@ -37,15 +37,18 @@ export const selectorImageOverlay = '.popup_type_show-image';
 export const selectorAddCard = '.popup_type_add-element';
 export const selectorEditProfile = '.popup_type_edit-profile';
 export const selectorContainer = '.elements';
+export const selectorAvatar = '.popup_type_add-avatar'
   // Формы
 export const formEdit = document.querySelector('.input_edit-profile');
 export const formAdd = document.querySelector('.input_add-card');
+export const formAvatar = document.querySelector('.input_add-avatar')
   //кнопки popupEdit
 export const openFormEdit = document.querySelector('.profile__edit-button');
 export const closeFormEdit = document.querySelector('.popup__button_type_close-edit');
   //кнопки popupAdd
 export const openFormAdd = document.querySelector('.profile__add-button');
 export const closeFormAdd = document.querySelector('.popup__button_type_close-add');
+export const openFormAvatar = document.querySelector('.profile__user-avatar')
   //переменные 3х popup
 export const popupEdit = document.querySelector('.popup_type_edit-profile');
 export const popupAdd = document.querySelector('.popup_type_add-element');
@@ -60,3 +63,10 @@ export const inputs = document.querySelector('.input');
 export const inputName = document.querySelector('.input__text_type_name');
 export const inputContent = document.querySelector('.input__text_type_content');
 //export const submitButton = document.querySelectorAll('.input__button-save');
+
+export const elementsUserInfo = {
+    name: document.querySelector('.profile__title'),
+    about: document.querySelector('.profile__subtitle'),
+    avatar: document.querySelector('.profile__avatar')
+}
+export const popupTypeDeleteImage = '.popup_type_delete-image';
