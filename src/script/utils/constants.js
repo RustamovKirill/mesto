@@ -62,7 +62,6 @@ export const profileSubtitle = document.querySelector('.profile__subtitle');
 export const inputs = document.querySelector('.input');
 export const inputName = document.querySelector('.input__text_type_name');
 export const inputContent = document.querySelector('.input__text_type_content');
-//export const submitButton = document.querySelectorAll('.input__button-save');
 
 export const elementsUserInfo = {
     name: document.querySelector('.profile__title'),
