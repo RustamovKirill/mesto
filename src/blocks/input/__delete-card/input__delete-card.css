@@ -1,4 +1,4 @@
-.input_delete-card {
+.input__delete-card {
     margin: 38px auto 36px;
     width: 358px;
     display: flex;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 425px) {
-    .input_delete-card {
+    .input__delete-card {
         max-width: 282px;
     }
 }

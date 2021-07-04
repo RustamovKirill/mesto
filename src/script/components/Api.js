@@ -1,67 +1,81 @@
 export default class Api{
     constructor(config) {
-        this.config = config
-        this.url = config.baseUrl;
+        this.url = config.url;
         this.headers = config.headers;
     }
-    
-    checkJSONRes(res) {
+    // дейсвие при появление ошибки
+    _checkJSONRes(res) {
         if (res.ok) {
             return res.json();
           }
           return Promise.reject(`Ошибка ${res.status}`);
         }
-    // загрузка информации о пользователе с сервера
+    // получение информации о пользователе с сервера
     getUserInfo() {
-            return fetch(`${this.url}/users/me`, this.config).then(res => this.checkJSONRes(res));
+            return fetch(`${this.url}/users/me`, {
+                method: 'GET',
+                headers: this.headers
+            }).then(res => this._checkJSONRes(res));
         }
-    // загрузка карточек с сервера
+
+    // получение карточек с сервера
     getInitialCards() {
-        return fetch(`${this.url}/cards`, this.config).then(res => this.checkJSONRes(res));
+        return fetch(`${this.url}/cards`, {
+          method: 'GET',
+          headers: this._headers
+        }).then(res => this._checkJSONRes(res));
       }
     // редактирование профиля
-    addUserInfo(values) {
+    addUserInfo(name, about) {
         return fetch(`${this.url}/users/me`, {
           method: 'PATCH',
           headers: this.headers,
-          body: JSON.stringify(values),
-        }).then(res => this.checkJSONRes(res));
+          body: JSON.stringify({
+            name,
+            about
+          }),
+        }).then(res => this._checkJSONRes(res));
     }
     // добавленеи новой карточки
-    addNewCards(values) {
+    addNewCards(name, link) {
         return fetch(`${this.url}/cards`, {
           method: 'POST',
-          headers: this.headers,
-          body: JSON.stringify(values),
-          }).then(res => this.checkJSONRes(res));
+          headers: this._headers,
+          body: JSON.stringify({
+            name,
+            link,
+          }),
+          }).then(res => this._checkJSONRes(res));
     }
     // добавление аватарки
-    addNewAvatar(value) {
-        return fetch(`${this.url}/users/me/avatar`, {
+    addNewAvatar(link) {
+        return fetch(`${this.baseUrl}/users/me/avatar`, {
           method: 'PATCH',
           headers: this.headers,
-          body: JSON.stringify(value),
-        }).then(res => this.checkJSONRes(res));
+          body: JSON.stringify({
+            avatar: link,
+          }),
+        }).then(res => this._checkJSONRes(res));
     }
     // проставляем лайки
     likeCard(cardId) {
-        return fetch(`${this.url}/cards/likes/${cardId}`, {
+        return fetch(`${this.baseUrl}/cards/like/${cardId}`, {
           method: 'PUT',
           headers: this.headers,
-        }).then(res => this.checkJSONRes(res));
+        }).then(res => this._checkJSONRes(res));
     }
     // удаление карточек
     deleteCard(cardId) {
-        return fetch(`${this.url}/cards/${cardId}`, {
+        return fetch(`${this.baseUrl}/cards/${cardId}`, {
           method: 'DELETE',
           headers: this.headers,
-        }).then(res => this.checkJSONRes(res));
+        }).then(res => this._checkJSONRes(res));
     }
     // снимаем лайк с карточки
     deleteLikeCard(cardId) {
-        return fetch(`${this.url}/cards/likes/${cardId}`, {
+        return fetch(`${this.baseUrl}/cards/like/${cardId}`, {
           method: 'DELETE',
           headers: this.headers,
-        }).then(res => this.checkJSONRes(res));
+        }).then(res => this._checkJSONRe(res));
     }
 }

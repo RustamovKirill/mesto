@@ -59,7 +59,7 @@
 @import url("../blocks/input/__text/input__text.css");
 @import url("../blocks/input/__button-save/input__button-save.css");
 @import url("../blocks/input/__button-yes/input__button-yes.css");
-@import url("../blocks/input/_delete-card/input_delete-card.css");
+@import url("../blocks/input/__delete-card/input__delete-card.css");
 @import url("../blocks/input/__text/_type/input__text_type_name.css");
 @import url("../blocks/input/__text/_type/input__text_type_content.css");
 @import url("../blocks/input/__text/_type/input__text_type_title.css");
