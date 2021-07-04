@@ -1,0 +1,13 @@
+.input_delete-card {
+    margin: 38px auto 36px;
+    width: 358px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 425px) {
+    .input_delete-card {
+        max-width: 282px;
+    }
+}
