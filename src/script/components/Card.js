@@ -1,6 +1,6 @@
 export default class Card{
-  constructor({myId, link, name, likes, owner, _id}, handleCardClick, removeCard, putLike, removeLike) {
-    console.log(owner)
+  constructor(templateSelector, {myId, link, name, likes, owner, _id}, handleCardClick, removeCard, putLike, removeLike) {
+    this._templateSelector = templateSelector
     this._myId = myId;
     this._link = link;
     this._name = name;
@@ -13,10 +13,10 @@ export default class Card{
     this._removeLike = removeLike;
   }
   _getTemplate() {
-    const cardElement = document.querySelector('.template')
-    .content.querySelector('.element').cloneNode(true);
-
-    return cardElement;
+    return document.querySelector(this._templateSelector)
+        .content
+        .querySelector('.element')
+        .cloneNode(true);
   }
   renderCard() {
     this._element = this._getTemplate();

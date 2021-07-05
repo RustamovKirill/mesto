@@ -70,3 +70,4 @@ export const elementsUserInfo = {
     avatar: document.querySelector('.profile__avatar')
 }
 export const popupTypeDeleteImage = '.popup_type_delete-image';
+export const templateSelector = '.template'

@@ -12,7 +12,7 @@ validationConfig,
 selectorImageOverlay, selectorAddCard, selectorEditProfile, selectorContainer,
 formEdit, formAdd, formAvatar,
 openFormEdit,
-openFormAdd, openFormAvatar,
+openFormAdd, openFormAvatar, templateSelector,
 profileTitle, profileSubtitle, inputName, inputContent, elementsUserInfo, popupTypeDeleteImage, selectorAvatar} from '../script/utils/constants.js';
 import PopupDeleteImage from "../script/components/PopupDeleteImage";
 
@@ -33,12 +33,12 @@ const api = new Api({
 
 api.getUserInfo().then(({name, about, avatar, _id}) => {
     const myId = _id
-    userInfo.setUserInfo({name, about})
-    elementsUserInfo.avatar.src = avatar
+    userInfo.setUserInfo({name, about, avatar})
 
     //Функция создания новой карточки
     const createNewCard = (card) => {
         const newCard = new Card(
+            templateSelector,
             {myId, ...card},
             popupFullScreen,
             //Callback удаления карточки
@@ -110,7 +110,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
             api.addNewAvatar(item)
                 .then((data) => {
                     submitText.textContent = 'Сохранить'
-                    elementsUserInfo.avatar.src = data.avatar
+                    userInfo.setUserInfo(data)
                     popupTypeAvatar.close()
                 })
                 .catch(e => console.log(e))
@@ -133,9 +133,6 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         openFormAvatar.addEventListener('click', () => {
             validatorAvatarForm.disableSubmitResetInput()
             popupTypeAvatar.open();
-            const {title, content} = userInfo.getUserInfo();
-            inputName.value = title;
-            inputContent.value = content;
         });
 
         const validatorEditForm = new FormValidator (validationConfig, formEdit);
