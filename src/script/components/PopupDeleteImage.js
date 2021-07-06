@@ -13,10 +13,11 @@ export default class PopupDeleteImage extends Popup{
         this._submitHandler()
     }
 
-    setEventListeners(){
-        super.setEventListener()
+    open(){
+        super.open()
         this._form.addEventListener('submit', this._handleSubmit)
     }
+    
     close() {
         super.close()
         this._form.removeEventListener('submit', this._handleSubmit)

@@ -19,7 +19,6 @@ import PopupDeleteImage from "../script/components/PopupDeleteImage";
 const userInfo = new UserInfo(elementsUserInfo)
 const popupFullScreen = new PopupWithImage (selectorImageOverlay);
 const popupDeleteImage = new PopupDeleteImage(popupTypeDeleteImage)
-popupDeleteImage.setEventListeners()
 const renderCards = new Section(selectorContainer)
 
 // экземпляр класса Api
@@ -88,7 +87,6 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
                     popupAddCard.close()
                 })
                 .catch(e => console.log(e))
-            popupAddCard.close();
         });
 
         const popupEditProfile = new PopupWithForm(selectorEditProfile, (item) => {
